@@ -2,6 +2,8 @@ import time
 import pandas as pd
 import numpy as np
 
+# Global variarbles ----------------------
+# CITY_DATA stores a dictionary of cities as keys with their corresponding data files as values
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
