@@ -17,7 +17,7 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!')
+    print('Hello! I\'m your Bikeshare Analytics App. Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     cities = ['chicago', 'Chicago', 'New York City', 'new york city', 'washington', 'Washington']
     months = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
@@ -71,14 +71,14 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     # Loads the data for the city specified by the user
-    df = pd.read_csv(CITY_DATA[city.lower()])
+    city_df = pd.read_csv(CITY_DATA[city.lower()])
 
     # Converts the Start Time field into a datetime data type
-    df['Start Time'] = pd.to_datetime(df['Start Time'])
+    city_df['Start Time'] = pd.to_datetime(city_df['Start Time'])
 
     # Extract month and day of week from datetime field for new columns
-    df['month'] = df['Start Time'].dt.month
-    df['day_of_week'] = df['Start Time'].dt.weekday_name
+    city_df['month'] = city_df['Start Time'].dt.month
+    city_df['day_of_week'] = city_df['Start Time'].dt.weekday_name
 
     # Filter by Month if applicable
     if month != 'all':
@@ -87,15 +87,15 @@ def load_data(city, month, day):
         month = months.index(month) + 1
 
         # filter by month to create the new dataframe
-        df = df[df['month'] == month]
+        city_df = city_df[city_df['month'] == month]
 
     # filter by day of week if applicable
     if day != 'all':
         # filter by day of week to create the new dataframe
-        df = df[df['day_of_week'] == day.title()]
+        city_df = city_df[city_df['day_of_week'] == day.title()]
 
 
-    return df
+    return city_df
 
 
 def time_stats(df):
@@ -231,8 +231,8 @@ def main():
         user_stats(df)
         show_raw_data(df)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
+        redo = input('\nWould you like to restart? Enter yes or no.\n')
+        if redo.lower() != 'yes':
             break
 
 
